@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trading Dashboard</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-blue-950 flex justify-center items-center h-screen text-white">
+
+<div class="bg-blue-900 p-6 rounded-2xl w-80 shadow-2xl">
+
+  <h2 class="text-lg mb-2 opacity-80">Current Balance</h2>
+  <div id="balance" class="text-3xl text-green-400 font-bold">$10203</div>
+
+  <div id="username" class="mt-2 text-sm opacity-70">Krishna trader</div>
+
+  <hr class="my-4 border-blue-700">
+
+  <input id="amount" type="number" placeholder="Enter balance"
+    class="w-full p-2 mb-2 rounded bg-blue-800 border-none outline-none">
+
+  <input id="name" type="text" placeholder="Enter name"
+    class="w-full p-2 mb-2 rounded bg-blue-800 border-none outline-none">
+
+  <select id="country"
+    class="w-full p-2 mb-2 rounded bg-blue-800 border-none outline-none">
+    <option>India</option>
+    <option>Bangladesh</option>
+    <option>UAE</option>
+  </select>
+
+  <button onclick="updateData()"
+    class="w-full bg-green-400 text-black p-2 rounded mt-2 font-semibold">
+    Update
+  </button>
+
+</div>
+
+<script>
+
+function updateData() {
+  let amount = document.getElementById("amount").value;
+  let name = document.getElementById("name").value;
+
+  if(amount) {
+    document.getElementById("balance").innerText = "$" + amount;
+  }
+
+  if(name) {
+    document.getElementById("username").innerText = name;
+  }
+
+  // save data (local storage)
+  localStorage.setItem("balance", amount);
+  localStorage.setItem("name", name);
+}
+
+// load saved data
+window.onload = function() {
+  let savedBalance = localStorage.getItem("balance");
+  let savedName = localStorage.getItem("name");
+
+  if(savedBalance) {
+    document.getElementById("balance").innerText = "$" + savedBalance;
+  }
+
+  if(savedName) {
+    document.getElementById("username").innerText = savedName;
+  }
+}
+
+</script>
+
+</body>
+</html>
